@@ -1,5 +1,5 @@
-import { httpServer } from "./app";
-import connectDB from "./config/db";
+import { httpServer } from "./app.js";
+import connectDB from "./config/db/index.js";
 import dotenv from "dotenv";
 
 dotenv.config({

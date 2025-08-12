@@ -1,6 +1,27 @@
 import connectDB from "../config/db/index.js";
 import { generateUUID } from "../utils/uuid.js";
 
+function mergeSort(arr) {
+  if (arr.length <= 1) return arr;
+  const mid = Math.floor(arr.length / 2);
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
+  return merge(left, right);
+}
+
+function merge(left, right) {
+  let result = [];
+  let i = 0, j = 0;
+  while (i < left.length && j < right.length) {
+    if (left[i].categoryName.toLowerCase() < right[j].categoryName.toLowerCase()) {
+      result.push(left[i++]);
+    } else {
+      result.push(right[j++]);
+    }
+  }
+  return result.concat(left.slice(i)).concat(right.slice(j));
+}
+
 class CategoryModel {
   // Create category
   static createCategory = async (categoryName, categoryDescription) => {
@@ -69,9 +90,11 @@ class CategoryModel {
   static getAllCategories = async () => {
     const db = await connectDB();
     try {
-      const categories = await db.execute("SELECT * FROM Categories");
+      const [categories] = await db.execute("SELECT * FROM Categories");
 
-      return categories[0];
+      const sortedCategories = mergeSort(categories);
+
+      return sortedCategories;
     } catch (error) {
       console.log("error getting categories", error);
     } finally {

@@ -18,7 +18,7 @@ import {
   getAllUserOrders,
   placeOrder,
 } from "../controllers/order.controller.js";
-import { productOrderValidator } from "../validators/order.validator.js";
+import { placeOrderValidator } from "../validators/order.validator.js";
 
 const router = express.Router();
 
@@ -33,6 +33,6 @@ router.route("/get-categories").get(validate, verifyJwt, getCategories);
 router.route("/order").get(validate, verifyJwt, getAllUserOrders);
 router
   .route("/order")
-  .post(productOrderValidator(), validate, verifyJwt, placeOrder);
+  .post(placeOrderValidator(), validate, verifyJwt, placeOrder);
 
 export default router;

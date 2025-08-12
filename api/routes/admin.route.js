@@ -1,5 +1,4 @@
 import express from "express";
-import { validate } from "uuid";
 
 import { verifyJwt } from "../middlewares/jwt.authMiddleware.js";
 import { verifyAdmin } from "../middlewares/admin.authMiddleware.js";
@@ -13,6 +12,7 @@ import {
   updateProduct,
 } from "../controllers/admin.controller.js";
 import { updateOrderStatus } from "../controllers/order.controller.js";
+import { validate } from "../validators/validate.js";
 
 const router = express.Router();
 

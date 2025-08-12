@@ -25,9 +25,9 @@ const storage2 = diskStorage({
 
 // check for file type before uploading
 const checkFileType = (file, cb) => {
-  const allowedTypes = /jpeg|jpg|png"gif|svg|webp|avif/;
+  const allowedTypes = /jpeg|jpg|png|gif|svg|webp|avif/;
 
-  // cehck extension of uploaded file
+  // check extension of uploaded file
   const extName = allowedTypes.test(
     path.extname(file.originalname).toLowerCase()
   );

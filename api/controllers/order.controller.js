@@ -29,7 +29,7 @@ export const getAllUserOrders = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Error while getting user orders");
   }
 
-  const filteredOrders = await transformUserOrderData(userOrders);
+  const filteredOrders = userOrders;
 
   return res
     .status(200)

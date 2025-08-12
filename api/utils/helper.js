@@ -1,3 +1,5 @@
+import { ProductModel } from "../models/product.model.js";
+
 // filter and rearranges the raw data of user placed orders
 export const transformUserOrderData = (rawUserOrderData) => {
   return new Promise((resolve, reject) => {
@@ -61,4 +63,22 @@ export const filterObject = (obj, filterFields = []) => {
   }, {});
 
   return filteredObject;
+};
+
+
+export const getOrderExpiryDate = () => {
+  const EDate = new Date();
+  EDate.setDate(EDate.getDate() + process.env.ORDER_EXPIRY_DAYS);
+  return Date.parse(EDate); // parse the Date object into milliseconds
+};
+
+
+export const calculateSubtotal = async (productId, quantity) => {
+  try {
+    const product = await ProductModel.getProductById(productId);
+
+    return parseInt(product.price) * quantity; // return subtotal
+  } catch (error) {
+    console.log(error.message);
+  }
 };

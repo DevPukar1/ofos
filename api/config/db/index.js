@@ -20,6 +20,7 @@ const connectDB = async () => {
     return db;
   } catch (error) {
     console.log("Error connecting to database:", error.message);
+    throw error;
   }
 };
 

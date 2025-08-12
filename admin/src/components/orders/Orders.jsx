@@ -2,11 +2,7 @@ import "./orders.scss";
 import { useContext, useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/scrollbar";
-import {
-  BsCurrencyDollar,
-  TfiTime,
-  userOrders as userOrder,
-} from "../../constants/index";
+import { BsCurrencyDollar, TfiTime } from "../../constants/index";
 import { filterOrdersByStatus } from "../../utils/helper";
 import context from "../../context/context";
 import { useDispatch, useSelector } from "react-redux";
@@ -93,7 +89,7 @@ export default function Orders() {
 
   useEffect(() => {
     dispatch(getOrderList(token));
-  }, []);
+  }, [dispatch, token]);
 
   const handleUpdateOrderStatus = () => {
     const orderId = selectedOrderItem.orderId;

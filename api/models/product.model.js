@@ -40,11 +40,11 @@ class ProductModel {
   static getProductById = async (productId) => {
     const db = await connectDB();
     try {
-      const product = db.execute(
+      const product = await db.execute(
         "SELECT * FROM Products WHERE productId = ? ",
         [productId]
       );
-
+      
       return product[0][0];
     } catch (error) {
       console.log("Error getting product from db", error);
@@ -61,7 +61,6 @@ class ProductModel {
         "SELECT * FROM Products WHERE ProductName REGEXP ? ORDER BY ProductName ",
         [productName]
       );
-
       return product[0][0];
     } catch (error) {
       console.log("Error getting product from db", error);

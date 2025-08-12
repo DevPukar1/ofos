@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { generateUUID } from "../utils/uuid.js";
 import connectDB from "../config/db/index.js";
+import jwt from "jsonwebtoken"
 
 class UserModel {
   // generate access token using jsonwebtoken
@@ -20,7 +21,7 @@ class UserModel {
   };
 
   static createUser = async (email, username, password) => {
-    const db = connectDB();
+    const db = await connectDB();
     try {
       // hash the password using bcrypt
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -37,8 +38,13 @@ class UserModel {
       // if user is created successfully return the user
       if (result.affectedRows > 0) {
         const user = await this.getUserById();
+        return user;
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error registering user: ", error.message);
+    } finally {
+      if (db) db.release();
+    }
   };
 
   // get user by email

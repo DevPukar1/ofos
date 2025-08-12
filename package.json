@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "install": "cd api && npm i && cd ../admin && npm i && cd ../client && npm i && cd ..",
+    "dev": "concurrently \"cd api && npm run dev\" \"cd admin && npm run dev\" \"cd client && npm run dev\""
+  },
+  "dependencies": {
+    "concurrently": "^9.2.0"
+  }
+}

@@ -1,6 +1,7 @@
 {
   "scripts": {
     "download": "npm i && cd api && npm i && cd ../admin && npm i && cd ../client && npm i && cd ..",
+    "env": "cd api && cp .env.sample .env && cd ../admin && cp .env.sample .env && cd ../client && cp .env.sample .env && cd ..",
     "dev": "concurrently \"cd api && npm run dev\" \"cd client && npm run dev\" \"cd admin && npm run dev\""
   },
   "dependencies": {
